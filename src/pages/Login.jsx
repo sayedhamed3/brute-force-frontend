@@ -24,6 +24,8 @@ function Login() {
           console.log(response.data)
           localStorage.setItem("token",response.data.token)
           validateToken()
+          // after successful login, redirect to homepage
+          navigate("/home")
           // navigate("/login")
       }
       catch(err){
