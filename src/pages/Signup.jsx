@@ -30,6 +30,7 @@ function Signup() {
     <div>
       
       <form onSubmit={handleSubmit}>
+        <h1>Signup</h1>
         <label htmlFor="username">Username:</label>
         <input
          type="text"
