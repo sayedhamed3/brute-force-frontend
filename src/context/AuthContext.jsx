@@ -14,7 +14,7 @@ function UserProvider(props){
     async function validateToken(){
         // first get the token from localStorage
         const token = localStorage.getItem("token")
-
+        console.log(token)
         if(token){
         // first condition if there is a valid token
 
