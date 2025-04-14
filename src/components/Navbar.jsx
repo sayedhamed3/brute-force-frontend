@@ -1,9 +1,9 @@
 import { Link } from "react-router"
 import { useContext } from "react"
-import { authContext } from "../../context/AuthContext"
+import { authContext } from "../context/AuthContext"
 
 
-function NavBar() {
+function Navbar() {
   const {user, logout} = useContext(authContext)
 
 
@@ -41,4 +41,4 @@ function NavBar() {
   )
 }
 
-export default NavBar
+export default Navbar

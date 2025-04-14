@@ -1,5 +1,6 @@
 import {useContext,useEffect} from 'react'
 import { authContext } from '../../context/AuthContext'
+import Index from './index';
 import axios from 'axios'
 
 function HomePage() {
@@ -19,10 +20,13 @@ function HomePage() {
   }, []);
 
   return (
+   <div>
     <div>
       <h1>Welcome, {user?.name || "Guest"}!</h1>
       <p>Were glad to have you here.</p>
     </div>
+    <Index />
+   </div>
   );
 }
 
