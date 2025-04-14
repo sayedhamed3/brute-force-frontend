@@ -6,16 +6,13 @@ import Signup from './pages/Signup'
 import Navbar from './components/Navbar'
 import ValidateIsLoggedIn from './validators/ValidateIsLoggedIn'
 import ValidateIsLoggedOut from './validators/ValidateIsLoggedOut'
-
 import Detailspage from './pages/Detailspage'
-
 import * as detailServices from './Services/detailservices.js'
 import { useContext, useState, useEffect } from 'react';
 import {authContext} from './context/AuthContext.jsx'
 function App() {
   const { user } = useContext(authContext);
 
-  
   useEffect(() => {
     const fetchAllUsers = async () => {
       const userData = await detailServices.index();
