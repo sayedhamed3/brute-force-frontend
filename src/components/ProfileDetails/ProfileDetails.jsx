@@ -2,6 +2,8 @@ import React, { use } from 'react'
 import { useState, useEffect, useContext } from 'react'
 import { getUser } from '../../services/userService'
 import { authContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router';
+import ProfileForm from '../ProfileForm/ProfileForm';
 
 function ProfileDetails() {
 
@@ -10,6 +12,8 @@ function ProfileDetails() {
     const [userDetail, setUserDetail] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const nav = useNavigate();
 
     const getUserDetails = async () => {
         try {
@@ -39,12 +43,15 @@ function ProfileDetails() {
             <p><strong>Name:</strong> {userDetail.name}</p>
             <p><strong>Role:</strong> {userDetail.role}</p>
         </div>
-        <div>
+        {/* only show metrics if not admin */}
+        { userDetail.role !== "admin" && (
+            <div>
             <h2>Metrics</h2>
             <p><strong>Height:</strong> {userDetail.metrics?.height}</p>
             <p><strong>Weight:</strong> {userDetail.metrics?.weight}</p>
-        </div>
-        {/* only show membership if user is of role: user */}
+        </div>)
+        }
+        {/* only show membership if user */}
         {userDetail.role === "user" && (
             <div>
                 <h2>Membership</h2>
@@ -54,13 +61,14 @@ function ProfileDetails() {
                 <p><strong>End Date:</strong> {userDetail.membership?.endDate}</p>
             </div>
         )}
-   
+        {/* only show trainer details if trainer */}
         {userDetail.role === "trainer" && (
             <div>
                 <h2>Trainer Details</h2>
-                {/* Add any trainer-specific details here */}
+                {/* Add any trainer details here */}
             </div>
         )}
+        <button onClick={() => nav(`/edit-profile/${userDetail._id}`)}>Edit Profile</button>
     </>
 
   )

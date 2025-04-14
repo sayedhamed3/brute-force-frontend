@@ -9,7 +9,7 @@ import ValidateIsLoggedOut from './validators/ValidateIsLoggedOut'
 import { useContext, useEffect } from 'react';
 import {authContext} from './context/AuthContext.jsx'
 import ProfileDetails from './components/ProfileDetails/ProfileDetails.jsx'
-
+import ProfileForm from './components/ProfileForm/ProfileForm.jsx'
 function App() {
 
   return (
@@ -20,6 +20,7 @@ function App() {
         <Route path="/login" element={<LoginForm/>}/>
         <Route path="/home" element={<ValidateIsLoggedIn><HomePageIndex/></ValidateIsLoggedIn>}/>
         <Route path="/profile" element={<ValidateIsLoggedIn><ProfileDetails/></ValidateIsLoggedIn>}/>
+        <Route path="/edit-profile/:userId" element={<ValidateIsLoggedIn><ProfileForm /></ValidateIsLoggedIn>} />
       </Routes>
     </>
   )
