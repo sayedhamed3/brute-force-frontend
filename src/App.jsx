@@ -10,8 +10,11 @@ import { useContext,useState , useEffect } from 'react';
 import {authContext} from './context/AuthContext.jsx'
 import ProfileDetails from './components/ProfileDetails/ProfileDetails.jsx'
 import ProfileForm from './components/ProfileForm/ProfileForm.jsx'
+import ExerciseList from './components/ExerciseList/ExerciseList.jsx'
+import ExerciseDetails from './components/ExerciseDetails/ExerciseDetails.jsx'
 import Classes from './components/ClassList/ClassList.jsx'
 import * as classService from './services/classService.js'
+
 function App() {
   const { user } = useContext(authContext); // Consume the user from authContext
   const [classes, setClasses] = useState([])
@@ -39,6 +42,8 @@ function App() {
         <Route path="/home" element={<ValidateIsLoggedIn><HomePageIndex/></ValidateIsLoggedIn>}/>
         <Route path="/profile" element={<ValidateIsLoggedIn><ProfileDetails/></ValidateIsLoggedIn>}/>
         <Route path="/edit-user/:userId" element={<ValidateIsLoggedIn><ProfileForm /></ValidateIsLoggedIn>} />
+        <Route path="/exercises" element={<ValidateIsLoggedIn><ExerciseList /></ValidateIsLoggedIn>} />
+        <Route path="/exercises/:exerciseId" element={<ValidateIsLoggedIn><ExerciseDetails /></ValidateIsLoggedIn>} />
         <Route path='/classes' element={<ValidateIsLoggedIn><Classes/></ValidateIsLoggedIn>}/>
       </Routes>
     </>

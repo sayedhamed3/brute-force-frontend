@@ -21,7 +21,8 @@ function NavBar() {
           <li>Welcome {user.username}</li>
           <Link to="/plan"><li>Exercise Plans</li></Link>
           <Link to="/classes"><li>Classes this week</li></Link>
-          <Link to="/profile"><li>Profile details</li></Link>
+          <Link to="/profile"><li>Profile</li></Link>
+          <Link to="/exercises" ><li>Exercises</li></Link>
           
 
           <button onClick={logout}>Logout</button>

@@ -3,7 +3,6 @@ import { useState, useEffect, useContext } from 'react'
 import { getUser } from '../../services/userService'
 import { authContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router';
-import ProfileForm from '../ProfileForm/ProfileForm';
 
 function ProfileDetails() {
 
