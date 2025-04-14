@@ -10,18 +10,12 @@ function HomepageIndex() {
     console.log(user);
   return (
     <div>
-
-        {/*{if user.role === 'admin'){
-
         <div>Homepage </div>
         {user.role === 'admin' ? (
             <AdminHomepage />
         ) : (
             <UserHomepage />
-
-        } else {
-            <TrainerHomepage />
-        }}*/}
+        )}
     </div>
   )
 }
