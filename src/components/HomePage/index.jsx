@@ -8,13 +8,13 @@ function index() {
     console.log(user);
   return (
     <div>
-        {if user.role === 'admin'){
+        {/*{if user.role === 'admin'){
             <AdminHomepage />
         } else if user.role === 'user'){
             <UserHomepage />
         } else {
             <TrainerHomepage />
-        }}
+        }}*/}
     </div>
   )
 }

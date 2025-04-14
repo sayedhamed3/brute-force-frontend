@@ -25,7 +25,7 @@ function HomePage() {
       <h1>Welcome, {user?.name || "Guest"}!</h1>
       <p>Were glad to have you here.</p>
     </div>
-    <Index />
+    
    </div>
   );
 }
