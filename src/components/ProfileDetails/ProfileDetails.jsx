@@ -3,12 +3,14 @@ import { useState, useEffect, useContext } from 'react'
 import { getUser } from '../../services/userService'
 import { authContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router';
+import { getTrainer } from '../../services/trainerService';
 
 function ProfileDetails() {
 
     const { user } = useContext(authContext);
 
     const [userDetail, setUserDetail] = useState({});
+    const [trainerDetail, setTrainerDetail] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -18,11 +20,24 @@ function ProfileDetails() {
         try {
             const userData = await getUser(user._id);
             setUserDetail(userData);
+                    if (user.role === "trainer") {
+            getTrainerDetails();
+        }
             console.log("user detail: ", userData);
             setLoading(false);
         } catch (err) {
             setError(err);
             setLoading(false);
+        }
+    }
+
+    const getTrainerDetails = async () => {
+        try {
+            const trainerData = await getTrainer(user._id);
+            setTrainerDetail(trainerData);
+            console.log("trainer detail: ", trainerData);
+        } catch (err) {
+            setError(err);
         }
     }
 
@@ -64,7 +79,14 @@ function ProfileDetails() {
         {userDetail.role === "trainer" && (
             <div>
                 <h2>Trainer Details</h2>
-                {/* Add any trainer details here */}
+                <p><strong>Specialization:</strong> {trainerDetail.specialization}</p>
+                <p><strong>Experience:</strong> {trainerDetail.experience}</p>
+                <ul>
+                    <strong>Certifications:</strong>
+                    {trainerDetail.certifications?.map((certification, index) => (
+                        <li key={index}>{certification}</li>
+                    ))}
+                </ul>
             </div>
         )}
         <button onClick={() => nav(`/edit-user/${userDetail._id}`)}>Edit Profile</button>

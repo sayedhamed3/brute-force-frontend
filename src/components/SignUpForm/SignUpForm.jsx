@@ -1,6 +1,7 @@
 import {useState} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
+import { createTrainer } from '../../services/trainerService'
 
 function SignUpForm() {
 
@@ -9,12 +10,23 @@ function SignUpForm() {
         password:"",
         name:"",
         avatar:"",
-        membership:"",
-        metrics:{
-          height:"",
-          weight:"",
+        membership: {
+          type: "trial",
+          isActive:true,
+          startDate:"",
+          endDate:"",
         },
-        role:""
+        metrics:{
+          height:0,
+          weight:0,
+        },
+        role:"user"
+    })
+
+    const [trainerFormData, setTrainerFormData] = useState({  
+      specialization:"",
+      experience:0,
+      certifications:[],
     })
 
     const navigate = useNavigate()
@@ -26,18 +38,61 @@ function SignUpForm() {
 
     async function handleSubmit(e){
         e.preventDefault()
+        console.log(formData)
         try{
-            await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/sign-up`,formData)
+            const newUser = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/sign-up`,formData)
+
+
+            console.log("newUser",newUser.data)
+            
+            if(formData.role === "trainer"){
+                try {
+                  await createTrainer({user: newUser.data._id,
+                    ...trainerFormData})
+                } catch (error) {
+                  console.error("Error creating trainer:", error);
+                  
+                }
+            }
             navigate("/login")
         }
         catch(err){
-            console.log(err)
+          console.error("Full error:", err);
+          console.error("Error response:", err.response?.data);
         }
     }
 
-    async function handleMetrics(e){
-        setFormData({...formData,metrics:{...formData.metrics,[e.target.name]:e.target.value}})
+async function handleMetrics(e){
+  setFormData({
+      ...formData,
+      metrics: {
+          ...formData.metrics,
+          [e.target.name]: (e.target.value)
+      }
+  })
+}
+
+    async function handleMembership(e){
+        setFormData({
+          ...formData,
+          membership:{
+            ...formData.membership,
+            [e.target.name]:e.target.value
+          }
+        })
     }
+
+    async function handleTrainer(e){
+        setTrainerFormData({...trainerFormData,[e.target.name]:e.target.value})
+    }
+
+    async function handleCertifications(e){
+        setTrainerFormData({
+            ...trainerFormData,
+            certifications: e.target.value.split('\n'),
+        })
+    }
+    
   return (
     <div>
       
@@ -74,27 +129,38 @@ function SignUpForm() {
         value={formData.avatar}
         onChange={handleChange}
         />
-        <label htmlFor='membership'>Membership:</label>
-        <select
-        name='membership'
-        id='membership'
-        value={formData.membership}
-        onChange={handleChange}
-        >
-            <option value="trial">Trial</option>
-            <option value="Monthly">Monthly</option>
-            <option value="annual">Annual</option>
-            <option value="trainer">Trainer</option>
-        </select>
+        <label htmlFor='type'>Membership:</label>
+        {formData.role === "trainer" ? (
+                    <select
+                        type="text"
+                        name='type'
+                        id='type'
+                        value="trainer"
+                        readOnly
+                    >
+                        <option value="trainer">Trainer</option>
+                        </select>
+                ) : (
+                    <select
+                        name='type'
+                        id='type'
+                        value={formData.membership.type}
+                        onChange={handleMembership}
+                    >
+                        <option value="trial">Trial</option>
+                        <option value="monthly">Monthly</option>
+                        <option value="annual">Annual</option>
+                    </select>
+                )}
         <label htmlFor='height'>Height:</label>
-        <input type="text"
+        <input type="number"
         name='height'
         id='height'
         value={formData.metrics.height}
         onChange={handleMetrics}
         />
         <label htmlFor='weight'>Weight:</label>
-        <input type="text"
+        <input type="number"
         name='weight'
         id='weight'
         value={formData.metrics.weight}
@@ -108,9 +174,35 @@ function SignUpForm() {
         onChange={handleChange}
         >
             <option value="user">User</option>
-            <option value="admin">Admin</option>
             <option value="trainer">Trainer</option>
         </select>
+        {formData.role === "trainer" && (
+          <div>
+            <label htmlFor='specialization'>Specialization:</label>
+            <input type="text"
+            name='specialization'
+            id='specialization'
+            value={trainerFormData.specialization}
+            onChange={handleTrainer}
+            />
+            <label htmlFor='experience'>Experience:</label>
+            <input type="number"
+            name='experience'
+            id='experience'
+            value={trainerFormData.experience}
+            onChange={handleTrainer}
+            />
+            <label htmlFor='certifications'>Certifications:</label>
+            <textarea
+              name='certifications'
+              id='certifications'
+              value={trainerFormData.certifications.join('\n')}
+              onChange={handleCertifications}
+              placeholder="Enter certifications, one per line"
+            />
+          </div>
+        )}
+
           <button>Submit</button>
       </form>
     </div>
