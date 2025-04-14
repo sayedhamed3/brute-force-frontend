@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { authContext } from "../context/AuthContext"
 
 
-function Navbar() {
+function NavBar() {
   const {user, logout} = useContext(authContext)
 
 
@@ -41,4 +41,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+export default NavBar
