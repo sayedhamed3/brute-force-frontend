@@ -20,7 +20,7 @@ function App() {
         <Route path="/login" element={<LoginForm/>}/>
         <Route path="/home" element={<ValidateIsLoggedIn><HomePageIndex/></ValidateIsLoggedIn>}/>
         <Route path="/profile" element={<ValidateIsLoggedIn><ProfileDetails/></ValidateIsLoggedIn>}/>
-        <Route path="/edit-profile/:userId" element={<ValidateIsLoggedIn><ProfileForm /></ValidateIsLoggedIn>} />
+        <Route path="/edit-user/:userId" element={<ValidateIsLoggedIn><ProfileForm /></ValidateIsLoggedIn>} />
       </Routes>
     </>
   )

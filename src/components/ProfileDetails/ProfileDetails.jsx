@@ -68,7 +68,7 @@ function ProfileDetails() {
                 {/* Add any trainer details here */}
             </div>
         )}
-        <button onClick={() => nav(`/edit-profile/${userDetail._id}`)}>Edit Profile</button>
+        <button onClick={() => nav(`/edit-user/${userDetail._id}`)}>Edit Profile</button>
     </>
 
   )
