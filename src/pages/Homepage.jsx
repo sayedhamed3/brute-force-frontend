@@ -11,8 +11,11 @@ function Homepage() {
     const response= await axios.get(`${import.meta.env.VITE_BACKEND_URL}/test-jwt/checkout`,{headers:{Authorization:`Bearer ${token}`}})
     console.log(response.data)
   }
+  
+  callProtectedRoute()
   return (
     <div>
+      Homepage
       <h1>Homepage</h1>
       <p>Welcome to the homepage!</p>
     </div>
