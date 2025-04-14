@@ -25,13 +25,14 @@ function LoginForm() {
           console.log(response.data)
           localStorage.setItem("token",response.data.token)
           validateToken()
-          const signedInUser = await login(formData)
-          setUser(signedInUser)
+          // const signedInUser = await login(formData)
+          // setUser(signedInUser)
           // after successful login, redirect to homepage
           navigate("/home")
           // navigate("/login")
       }
       catch(err){
+        console.log("ERRR")
           console.log(err)
       }
   }
