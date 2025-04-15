@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import axios from 'axios'
 import { useNavigate } from "react-router";
 
@@ -14,7 +14,7 @@ function UserProvider(props){
     async function validateToken(){
         // first get the token from localStorage
         const token = localStorage.getItem("token")
-
+        console.log(token)
         if(token){
         // first condition if there is a valid token
 

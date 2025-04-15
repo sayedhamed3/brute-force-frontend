@@ -1,16 +1,17 @@
 import {useState, useContext} from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router'
-import { authContext } from '../context/AuthContext'
+import { authContext } from '../..//context/AuthContext'
+import { login } from '../../services/authService.js'
 
 
-function Login() {
+function LoginForm() {
       const [formData, setFormData] = useState({
           username:"",
           password:""
       })
 
-      const {validateToken} = useContext(authContext)
+      const {validateToken, setUser} = useContext(authContext)
       const navigate = useNavigate()
 
       function handleChange(e){
@@ -24,9 +25,14 @@ function Login() {
           console.log(response.data)
           localStorage.setItem("token",response.data.token)
           validateToken()
+          // const signedInUser = await login(formData)
+          // setUser(signedInUser)
+          // after successful login, redirect to homepage
+          navigate("/home")
           // navigate("/login")
       }
       catch(err){
+        console.log("ERRR")
           console.log(err)
       }
   }
@@ -61,4 +67,4 @@ function Login() {
   )
 }
 
-export default Login
+export default LoginForm

@@ -1,9 +1,9 @@
 import { Link } from "react-router"
 import { useContext } from "react"
-import { authContext } from "../context/AuthContext"
+import { authContext } from "../../context/AuthContext"
 
 
-function Navbar() {
+function NavBar() {
   const {user, logout} = useContext(authContext)
 
 
@@ -14,10 +14,17 @@ function Navbar() {
         {user && (
 
           <>
+
+          {/*<Link to="/plan"><li>Exercise Plans</li></Link>
+          <Link to="/classes"><li>Classes this week</li></Link>
+          <Link to="/user"><li>Personal details</li></Link>*/}
+          <li>Welcome {user.username}</li>
           <Link to="/plan"><li>Exercise Plans</li></Link>
           <Link to="/classes"><li>Classes this week</li></Link>
-          <Link to="/user"><li>Personal details</li></Link>
-          <li>Welcome {user.username}</li>
+          <Link to="/profile"><li>Profile</li></Link>
+          <Link to="/exercises" ><li>Exercises</li></Link>
+          
+
           <button onClick={logout}>Logout</button>
           </>
         )}
@@ -34,4 +41,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+export default NavBar
