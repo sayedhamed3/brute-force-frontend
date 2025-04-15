@@ -14,6 +14,7 @@ import ExerciseList from './components/ExerciseList/ExerciseList.jsx'
 import ExerciseDetails from './components/ExerciseDetails/ExerciseDetails.jsx'
 import Classes from './components/ClassList/ClassList.jsx'
 import * as classService from './services/classService.js'
+import PlanList from './components/PlanList/PlanList.jsx'
 
 function App() {
   const { user } = useContext(authContext); // Consume the user from authContext
@@ -45,6 +46,10 @@ function App() {
         <Route path="/exercises" element={<ValidateIsLoggedIn><ExerciseList /></ValidateIsLoggedIn>} />
         <Route path="/exercises/:exerciseId" element={<ValidateIsLoggedIn><ExerciseDetails /></ValidateIsLoggedIn>} />
         <Route path='/classes' element={<ValidateIsLoggedIn><Classes/></ValidateIsLoggedIn>}/>
+        <Route path="/plans" element={<ValidateIsLoggedIn><PlanList /></ValidateIsLoggedIn>} />
+        <Route path="/plans/create" element={<ValidateIsLoggedIn><PlanList /></ValidateIsLoggedIn>} />
+        {/* <Route path="/edit-plan/:planId" element={<ValidateIsLoggedIn><PlanList /></ValidateIsLoggedIn>} /> */}
+        <Route path="/" element={<ValidateIsLoggedOut><HomePageIndex/></ValidateIsLoggedOut>}/>
       </Routes>
     </>
   )

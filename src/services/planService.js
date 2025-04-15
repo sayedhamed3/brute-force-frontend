@@ -13,6 +13,17 @@ const index = async () => {
     }
 }
 
+const getPlan = async (planId) => {
+    try {
+        const token = localStorage.getItem("token");
+        const res = await axios.get(`${BASE_URL}/${planId}`, {headers:{Authorization: `Bearer ${token}`}});
+    
+        return res.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 const getPrivatePlans = async () => {
     try {
         const token = localStorage.getItem("token");
@@ -72,11 +83,62 @@ const addComment = async (planId, comment) => {
     }
 }
 
+const addExerciseToPlan = async (planId, exerciseId, sets) => {
+    try {
+        const token = localStorage.getItem("token");
+        const res = await axios.post(`${BASE_URL}/${planId}/exercise`, {exerciseId, sets}, {headers:{Authorization: `Bearer ${token}`}});
+
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const removeExerciseFromPlan = async (planId, exerciseId) => {
+    try {
+        const token = localStorage.getItem("token");
+        const res = await axios.delete(`${BASE_URL}/${planId}/exercise/${exerciseId}`, {headers:{Authorization: `Bearer ${token}`}});
+
+        return res.data;
+    } catch (error) {
+        console.log(error);
+        
+    }
+}
+
+const updateExerciseInPlan = async (planId, exerciseId, sets) => { 
+    try {
+        const token = localStorage.getItem("token");
+        const res = await axios.put(`${BASE_URL}/${planId}/exercise/${exerciseId}`, {sets}, {headers:{Authorization: `Bearer ${token}`}});
+
+        return res.data;
+    } catch (error) {
+       console.log(error) 
+    }
+}
+
+const getExercisesInPlan = async (planId, exerciseId) => { 
+    try {
+        const token = localStorage.getItem("token");
+        const res = await axios.get(`${BASE_URL}/${planId}/exercise/${exerciseId}`, {headers:{Authorization: `Bearer ${token}`}});
+
+        return res.data;
+    } catch (error) {
+       console.log(error) 
+    }
+}
+
 export {
     index,
+    getPlan,
     getPrivatePlans,
     createdPlan,
     updatePlan,
     deletePlan,
-    addComment
+    addComment,
+    addExerciseToPlan,
+    removeExerciseFromPlan,
+    updateExerciseInPlan,
+    getExercisesInPlan,
 }
