@@ -58,11 +58,15 @@ function classList(){
                         {(user.role === "admin" || user.role === "trainer")&& (
                           <div>
                             <button onClick={() => navigate(`/${classItem._id}`)}>View class details</button>
-                            <button onClick={() => navigate(`/classes/create`)}>Add a new Class</button>
                           </div>
                         )}
                     </div>
                 ))}
+                {(user.role === "admin" || user.role === "trainer")&& (
+                  <div>
+                    <button onClick={() => navigate(`/classes/create`)}>Add a new Class</button>
+                  </div>
+                )}
         </div>
        );
 }
