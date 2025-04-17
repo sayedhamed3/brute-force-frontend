@@ -14,12 +14,8 @@ function NavBar() {
         {user && (
 
           <>
-
-          {/*<Link to="/plan"><li>Exercise Plans</li></Link>
-          <Link to="/classes"><li>Classes this week</li></Link>
-          <Link to="/user"><li>Personal details</li></Link>*/}
           <li>Welcome {user.username}</li>
-          <Link to="/plan"><li>Exercise Plans</li></Link>
+          <Link to="/plans"><li>Exercise Plans</li></Link>
           <Link to="/classes"><li>Classes this week</li></Link>
           <Link to="/profile"><li>Profile</li></Link>
           <Link to="/exercises" ><li>Exercises</li></Link>
