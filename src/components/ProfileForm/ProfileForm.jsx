@@ -61,8 +61,10 @@ function ProfileForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await updateUser(userId, formData);
-            console.log("User updated successfully");
+            console.log(formData)
+            const newUser = await updateUser(userId, formData);
+            console.log("User updated successfully", newUser);
+            
         } catch (err) {
             console.error("Error updating user: ", err);
         }
@@ -130,17 +132,13 @@ function ProfileForm() {
                         <div>
                             <h3>Membership</h3>
                             <label>Type:</label>
-                            <input
-                                type="text"
-                                name="membership.type"
-                                value={formData.membership.type}
-                                onChange={(e) =>
-                                    setFormData({
-                                        ...formData,
-                                        membership: { ...formData.membership, type: e.target.value },
-                                    })
-                                }
-                            />
+                            <select name="membership.type" id="membership.type"
+                            value={formData.membership.type}
+                            onChange={handleChange}>
+                                <option value="trial">Trial</option>
+                                <option value="monthly">Monthly</option>
+                                <option value="annual">Annual</option>
+                            </select>
                             <label>Active:</label>
                             <input
                                 type="checkbox"

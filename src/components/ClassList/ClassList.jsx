@@ -1,6 +1,7 @@
 import { useState,useContext,useEffect} from "react";
 import { authContext } from "../../context/AuthContext";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 function classList(){
     const { user } = useContext(authContext); // Consume the user from authContext

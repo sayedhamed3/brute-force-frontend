@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useContext } from "react";
+import { authContext } from "../context/AuthContext";
 
 const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/plan`;
 
@@ -28,14 +30,29 @@ const getPrivatePlans = async () => {
     try {
         const token = localStorage.getItem("token");
         const res = await axios.get(`${BASE_URL}/private`, {headers:{Authorization: `Bearer ${token}`}});
-    
+        
+        console.log(res.data)
         return res.data;
     } catch (err) {
         console.log(err);
     }
 }
 
-const createdPlan = async (plan) => {
+const getMyPlans = async (userId) => {
+    try {
+        const publicPlans = await index()
+        const privateplans = await getPrivatePlans()
+        
+        const userPublicPlans = publicPlans.filter(plan => plan.Maker?._id === userId)
+
+        return [...userPublicPlans,...privateplans]
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const createPlan = async (plan) => {
     try {
         const token = localStorage.getItem("token");
         const res = await axios.post(`${BASE_URL}`, plan, {headers:{Authorization: `Bearer ${token}`}});
@@ -133,7 +150,8 @@ export {
     index,
     getPlan,
     getPrivatePlans,
-    createdPlan,
+    getMyPlans,
+    createPlan,
     updatePlan,
     deletePlan,
     addComment,
