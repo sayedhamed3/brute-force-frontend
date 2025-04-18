@@ -31,7 +31,15 @@ function classList(){
           console.log("error fetching classes:",error)
         }
       }
-
+      const handleDelete = async (classId) => {
+        try {
+            await deleteClass(classId);
+            getClasses(); // Refresh the user list after deletion
+            console.log("Class deleted successfully");
+        } catch (error) {
+            console.log("Error deleting user:", error);
+        }
+    }
       useEffect(() => {
 
         getClasses();
@@ -59,6 +67,7 @@ function classList(){
                         {(user.role === "admin" || user.role === "trainer")&& (
                           <div>
                             <button onClick={() => navigate(`/classes/${classItem._id}`)}>View class details</button>
+                            <button onClick={() => handleDelete(classItem._id)}>Delete</button>
                           </div>
                         )}
                     </div>

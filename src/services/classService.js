@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = `${import.meta.env.VITE_BACK_END_SERVER_URL}/classes`;
+const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/classes`;
 const index = async () => {
     try {
       const token=localStorage.getItem("token")
