@@ -58,14 +58,14 @@ function classList(){
                         <p>End Time: {new Date(classItem.endTime).toLocaleTimeString()}</p>
                         {(user.role === "admin" || user.role === "trainer")&& (
                           <div>
-                            <button onClick={() => navigate(`/${classItem._id}`)}>View class details</button>
+                            <button onClick={() => navigate(`/classes/${classItem._id}`)}>View class details</button>
                           </div>
                         )}
                     </div>
                 ))}
                 {(user.role === "admin" || user.role === "trainer")&& (
                   <div>
-                    <button onClick={() => navigate(`/classes/create`)}>Add a new Class</button>
+                    <button onClick={() => navigate(`/classes/create`,{state:{isEdit:false}})}>Add a new Class</button>
                   </div>
                 )}
         </div>

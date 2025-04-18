@@ -1,9 +1,14 @@
 import axios from "axios"
-import { useContext, useEffect,useState } from "react"
-import { useNavigate } from "react-router"
+import { use, useContext, useEffect,useState } from "react"
+import { useNavigate,useLocation,useParams } from "react-router"
 import { createClass,updateClass } from "../../services/classService"
+
 function ClassForm(){
     const navigate = useNavigate()
+    const location=useLocation()
+    const {classId}=useParams()
+    const isEdit=location.state?.isEdit
+    {console.log(isEdit)}
     const [ClassData, setClassData] = useState({
         name:"",
         description:"",
@@ -39,6 +44,20 @@ function ClassForm(){
                 console.error("Error fetching trainers:", error)
             }
         }
+        const fetchClassData=async () => {
+            if(isEdit){
+                try {
+                    const token = localStorage.getItem("token")
+                    const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/classes/${classId}`, {
+                        headers: { Authorization: `Bearer ${token}` },
+                    })
+                    setClassData(response.data)
+                } catch (error) {
+                    console.error("Error fetching class data:", error)
+                }
+            }
+        }
+        fetchClassData()
         fetchPlans()
         fetchTrainers()
     }, [])
@@ -57,8 +76,13 @@ function ClassForm(){
         e.preventDefault()
         try {
             const token = localStorage.getItem("token")
-            const response = await createClass(ClassData,token)
-            console.log("Class created:", response.data)
+            if (isEdit) {
+                const response = await updateClass(classId, ClassData, token)
+                console.log("Class updated successfully:", response.data)
+            } else {
+                const response = await createClass(ClassData,token)
+                console.log("Class created:", response.data)
+            }
             navigate("/")
         } catch (error) {
             console.error("Error creating class:", error)
@@ -67,9 +91,8 @@ function ClassForm(){
     }
     return(
         <div>
-            <h1>Class Form</h1>
-            
-            <form>
+            <h1>{isEdit? "Edit Class":"Create New Classes"}</h1>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="name">Name:</label>
                 <input type="text" id="name" name="name"value={ClassData.name} onChange={handleChange} required />
 
@@ -94,7 +117,7 @@ function ClassForm(){
                 </select>
 
                 <label htmlFor="daysOfWeek">Days of the week:</label>
-                <select id="daysOfWeek" name="daysOfWeek" multiple value={ClassData.daysOfWeek} onChange={handleChange} required>
+                <select id="daysOfWeek" name="daysOfWeek" multiple value={ClassData.daysOfWeek} onChange={handleDaysChange} required>
                     <option value="0">Sunday</option>
                     <option value="1">Monday</option>
                     <option value="2">Tuesday</option>
