@@ -47,6 +47,7 @@ function App() {
         <Route path='/classes' element={<ValidateIsLoggedIn><ClassesLIst/></ValidateIsLoggedIn>}/>
         <Route path="/classes/:classId" element={<ValidateIsLoggedIn><ClasseDetails/></ValidateIsLoggedIn>}/>
         <Route path='/classes/create' element={<ValidateIsLoggedIn><ClassForm/></ValidateIsLoggedIn>}></Route>
+        <Route path='/classes/edit/:classId' element={<ValidateIsLoggedIn><ClassForm/></ValidateIsLoggedIn>}></Route>
       </Routes>
     </>
   )
