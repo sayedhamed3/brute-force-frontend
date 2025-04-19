@@ -217,3 +217,32 @@ body {
   padding: 0;
   overflow-x: hidden;
 }
+
+.sign-up textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  border-bottom: 2px solid #333;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  min-height: 100px;
+  resize: vertical;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 24px;
+}
+
+
+.sign-up textarea:focus {
+  outline: none;
+  border-color: #ff0000;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+  background-color: rgba(15, 15, 15, 0.8);
+}
+
+.sign-up textarea + label {
+  margin-top: 24px;
+}

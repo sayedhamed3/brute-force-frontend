@@ -73,3 +73,53 @@
   transform: translateY(-2px); /* Slight lift effect */
   box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5); /* Glow effect */
 }
+
+.delete-confirmation {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.delete-confirmation span {
+  color: #ff5555;
+  font-size: 0.9rem;
+}
+
+.confirm-btn {
+  background-color: #ff0000;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.confirm-btn:hover {
+  background-color: #cc0000;
+}
+
+.cancel-btn {
+  background-color: #333;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background-color: #555;
+}
+
+.delete-btn {
+  background-color: #ff0000;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000;
+}

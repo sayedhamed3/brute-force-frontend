@@ -68,3 +68,44 @@ li {
   height: auto; /* Maintain aspect ratio */
   vertical-align: left; /* Align image in the middle of the nav bar */
 }
+
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .navbar li {
+    padding: 0.5rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  .logo {
+    margin: 0.5rem auto;
+  }
+
+  .navbar button {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .navbar li {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .navbar a, 
+  .navbar button,
+  .welcome-message {
+    font-size: 0.8rem;
+  }
+}

@@ -2,7 +2,7 @@ import React from "react";
 import { authContext } from "../../context/AuthContext";
 import { getUser, updateUser } from "../../services/userService";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import "../../../src/App.css";
 import "./ProfileForm.css";
 
@@ -10,6 +10,8 @@ function ProfileForm() {
   const { userId } = useParams();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -39,35 +41,38 @@ function ProfileForm() {
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-
-    // Handle nested objects (e.g., metrics.height)
-    if (name.includes(".")) {
-      const [parent, child] = name.split(".");
-      setFormData((prev) => ({
-        ...prev,
-        [parent]: {
-          ...prev[parent],
-          [child]: type === "checkbox" ? checked : value,
-        },
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: type === "checkbox" ? checked : value,
-      }));
+     const handleChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        
+        // Handle nested objects (e.g., metrics.height)
+        if (name.includes('.')) {
+            const [parent, child] = name.split('.');
+            setFormData(prev => ({
+                ...prev,
+                [parent]: {
+                    ...prev[parent],
+                    [child]: type === 'checkbox' ? checked : value
+                }
+            }));
+        } else {
+            setFormData(prev => ({
+                ...prev,
+                [name]: type === 'checkbox' ? checked : value
+            }));
+        }
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            console.log(formData)
+            const newUser = await updateUser(userId, formData);
+            console.log("User updated successfully", newUser);
+            navigate('/profile')
+            
+        } catch (err) {
+            console.error("Error updating user: ", err);
+        }
     }
-  };
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await updateUser(userId, formData);
-      console.log("User updated successfully");
-    } catch (err) {
-      console.error("Error updating user: ", err);
-    }
-  };
 
   useEffect(() => {
     getUserForm();
@@ -105,6 +110,9 @@ function ProfileForm() {
               <label>Role:</label>
               <input type="text" name="role" value={formData.role} disabled />
             </div>
+
+            {formData.role === "user" && (
+              <>
             <div>
               <h3>Metrics</h3>
               <label>Height:</label>
@@ -132,24 +140,15 @@ function ProfileForm() {
                 }
               />
             </div>
-            {formData.role === "user" && (
+           
               <div>
                 <h3>Membership</h3>
                 <label>Type:</label>
-                <input
-                  type="text"
-                  name="membership.type"
-                  value={formData.membership.type}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      membership: {
-                        ...formData.membership,
-                        type: e.target.value,
-                      },
-                    })
-                  }
-                />
+                <select name="membership.type" value={formData.membership.type} onChange={handleChange}>
+                  <option value="trial">Trial</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="annual">Annual</option>
+                </select>
                 <label>Active:</label>
                 <input
                   type="checkbox"
@@ -172,6 +171,7 @@ function ProfileForm() {
                   disabled
                 />
               </div>
+              </>
             )}
             <button type="submit">Save Changes</button>
           </>

@@ -8,6 +8,7 @@ import "./AdminHomepage.css";
 
 function AdminHomepage() {
   const [users, setUsers] = useState([]);
+  const [showConfirm, setShowConfirm] = useState(null)
 
   const nav = useNavigate();
 
@@ -24,6 +25,15 @@ function AdminHomepage() {
       console.log("Error deleting user:", error);
     }
   };
+
+const confirmDelete = (userId) => {
+  setShowConfirm(userId)
+}
+
+const cancelDelete = () => {
+  setShowConfirm(null)
+}
+
   const getAllUsers = async () => {
     try {
       const allUsers = await index();
@@ -61,7 +71,30 @@ function AdminHomepage() {
                 <button onClick={() => handleEdit(user._id)}>Edit</button>
               </td>
               <td>
-                <button onClick={() => handleDelete(user._id)}>Delete</button>
+                {showConfirm === user._id ? (
+                  <div className="delete-confirmation">
+                    <span>Are you sure?</span>
+                    <button 
+                      className="confirm-btn"
+                      onClick={() => handleDelete(user._id)}
+                    >
+                      Yes
+                    </button>
+                    <button 
+                      className="cancel-btn"
+                      onClick={cancelDelete}
+                    >
+                      No
+                    </button>
+                  </div>
+                ) : (
+                  <button 
+                    className="delete-btn"
+                    onClick={() => confirmDelete(user._id)}
+                  >
+                    Delete
+                  </button>
+                )}
               </td>
             </tr>
           ))}

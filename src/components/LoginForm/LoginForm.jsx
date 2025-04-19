@@ -2,7 +2,6 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { authContext } from "../..//context/AuthContext";
-import { login } from "../../services/authService.js";
 import "./LoginForm.css";
 
 function LoginForm() {
@@ -11,30 +10,26 @@ function LoginForm() {
     password: "",
   });
 
-  const { validateToken, setUser } = useContext(authContext);
+  const { validateToken } = useContext(authContext);
   const navigate = useNavigate();
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/auth/login`,
-        formData
-      );
-      console.log(response.data);
-      localStorage.setItem("token", response.data.token);
-      validateToken();
-      const signedInUser = await login(formData);
-      setUser(signedInUser);
-      // after successful login, redirect to homepage
-      navigate("/home");
-      // navigate("/login")
-    } catch (err) {
-      console.log(err);
+  async function handleSubmit(e){
+    e.preventDefault()
+    try{
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`,formData)
+        console.log(response)
+        
+        localStorage.setItem("token",response.data.token)
+
+        await validateToken()
+        navigate("/home")
+    }
+    catch(err){
+        console.log(err)
     }
   }
 

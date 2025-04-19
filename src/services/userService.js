@@ -41,6 +41,7 @@ const deleteUser = async (userId) => {
         const token = localStorage.getItem("token");
         const res = await axios.delete(`${BASE_URL}/${userId}`, {headers:{Authorization: `Bearer ${token}`}});
         
+        console.log(res.data)
         return res.data
     } catch (error) {
         console.log(error);

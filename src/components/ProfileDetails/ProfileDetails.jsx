@@ -3,30 +3,44 @@ import { useState, useEffect, useContext } from "react";
 import { getUser } from "../../services/userService";
 import { authContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router";
-import ProfileForm from "../ProfileForm/ProfileForm";
+import { getTrainer } from "../../services/trainerService";
 import "../../../src/App.css";
 import "./ProfileDetails.css";
 
 function ProfileDetails() {
   const { user } = useContext(authContext);
 
-  const [userDetail, setUserDetail] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+    const [userDetail, setUserDetail] = useState({});
+    const [trainerDetail, setTrainerDetail] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
   const nav = useNavigate();
 
-  const getUserDetails = async () => {
-    try {
-      const userData = await getUser(user._id);
-      setUserDetail(userData);
-      console.log("user detail: ", userData);
-      setLoading(false);
-    } catch (err) {
-      setError(err);
-      setLoading(false);
+    const getUserDetails = async () => {
+        try {
+            const userData = await getUser(user._id);
+            setUserDetail(userData);
+                    if (user.role === "trainer") {
+            getTrainerDetails();
+        }
+            console.log("user detail: ", userData);
+            setLoading(false);
+        } catch (err) {
+            setError(err);
+            setLoading(false);
+        }
     }
-  };
+
+    const getTrainerDetails = async () => {
+        try {
+            const trainerData = await getTrainer(user._id);
+            setTrainerDetail(trainerData);
+            console.log("trainer detail: ", trainerData);
+        } catch (err) {
+            setError(err);
+        }
+    }
 
   useEffect(() => {
     getUserDetails();
@@ -57,38 +71,36 @@ function ProfileDetails() {
           </p>
           <p>
             <strong>Weight:</strong> {userDetail.metrics?.weight}
-          </p>
-        </div>
-      )}
-      {userDetail.role === "user" && (
-        <div>
-          <h2>Membership</h2>
-          <p>
-            <strong>Type:</strong> {userDetail.membership?.type}
-          </p>
-          <p>
-            <strong>Status:</strong>{" "}
-            {userDetail.membership?.isActive ? "Active" : "Not Active"}
-          </p>
-          <p>
-            <strong>Start Date:</strong> {userDetail.membership?.startDate}
-          </p>
-          <p>
-            <strong>End Date:</strong> {userDetail.membership?.endDate}
-          </p>
-        </div>
-      )}
-      {userDetail.role === "trainer" && (
-        <div>
-          <h2>Trainer Details</h2>
-          {/* Add any trainer details here */}
-        </div>
-      )}
-      <button onClick={() => nav(`/edit-user/${userDetail._id}`)}>
-        Edit Profile
-      </button>
+          </p> 
+        </div> )}
+        {/* only show membership if user */}
+        {userDetail.role === "user" && (
+            <div>
+                <h2>Membership</h2>
+                <p><strong>Type:</strong> {userDetail.membership?.type}</p>
+                <p><strong>Status:</strong> {userDetail.membership?.isActive ? "Active" : "Not Active"}</p>
+                <p><strong>Start Date:</strong> {userDetail.membership?.startDate}</p>
+                <p><strong>End Date:</strong> {userDetail.membership?.endDate}</p>
+            </div>
+        )}
+        {/* only show trainer details if trainer */}
+        {userDetail.role === "trainer" && (
+            <div>
+                <h2>Trainer Details</h2>
+                <p><strong>Specialization:</strong> {trainerDetail.specialization}</p>
+                <p><strong>Experience:</strong> {trainerDetail.experience}</p>
+                <ul>
+                    <strong>Certifications:</strong>
+                    {trainerDetail.certifications?.map((certification, index) => (
+                        <li key={index}>{certification}</li>
+                    ))}
+                </ul>
+            </div>
+        )}
+        <button onClick={() => nav(`/edit-user/${userDetail._id}`)}>Edit Profile</button>
     </div>
-  );
+
+  )
 }
 
 export default ProfileDetails;
