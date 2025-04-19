@@ -1,0 +1,228 @@
+.login-in {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #660000, #000000);
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+.login-in h1 {
+  color: #ff0000;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Form container with correct centering */
+.login-in form {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3),
+    0 0 20px rgba(255, 0, 0, 0.2) inset;
+  width: 65%; /* Set to 65% of the container width */
+  max-width: 65%; /* Maximum width */
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+/* Glowing effect in the background */
+.login-in form::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.1) 0%, transparent 70%);
+  animation: pulse 15s infinite;
+  z-index: 0;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+}
+
+/* Form content */
+.login-in form > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Input field container */
+.form-group {
+  margin-bottom: 24px;
+  position: relative;
+  width: 100%;
+}
+
+/* Input and select styles */
+.login-in input,
+.login-in select {
+  width: 100%;
+  padding: 14px 16px;
+  border: none;
+  border-bottom: 2px solid #333;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.login-in input:focus,
+.login-in select:focus {
+  outline: none;
+  border-color: #ff0000;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.2);
+  background-color: rgba(15, 15, 15, 0.8);
+}
+
+/* Label styles with animation */
+.login-in label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ff5555;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Button styles */
+.login-in button {
+  background: linear-gradient(135deg, #ff3300, #aa0000);
+  color: #ffffff;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.login-in button:hover {
+  background: linear-gradient(135deg, #ff0000, #990000);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(255, 0, 0, 0.4);
+}
+
+.login-in button:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 10px rgba(255, 0, 0, 0.4);
+}
+
+/* Add ripple effect to button */
+.login-in button::after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin-top: -50px;
+  margin-left: -50px;
+  top: 50%;
+  left: 50%;
+  transform: scale(0);
+  opacity: 1;
+  transition: all 0.5s ease-out;
+}
+
+.login-in button:active::after {
+  transform: scale(3);
+  opacity: 0;
+}
+
+/* Heading styles */
+.login-in h1 {
+  text-align: center;
+  background: linear-gradient(90deg, #ff0000, #ff6666, #ff0000);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient 4s linear infinite;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+  font-size: 2.2rem;
+  letter-spacing: 3px;
+  font-weight: 800;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .login-in form {
+    width: 80%;
+    max-width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-in form {
+    width: 90%;
+    max-width: 90%;
+    padding: 30px;
+  }
+
+  .login-in h1 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Reset any potential conflicting styles */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}

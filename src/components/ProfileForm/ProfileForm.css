@@ -1,0 +1,79 @@
+/* Profile Form Styles */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #000000,
+    #660000
+  ); /* Black to dark red gradient */
+  color: #ffffff; /* White text for contrast */
+  padding: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.profile-form h3 {
+  color: #ff0000; /* Bright red heading */
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.profile-form form {
+  background-color: #1a1a1a; /* Dark black background */
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3); /* Red shadow */
+  width: 100%;
+  max-width: 500px; /* Limit form width */
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Add spacing between form elements */
+}
+
+.profile-form label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ff4444; /* Light red for labels */
+  text-transform: uppercase;
+}
+
+.profile-form input,
+.profile-form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background-color: #121212; /* Darker black for inputs */
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.profile-form input:focus,
+.profile-form select:focus {
+  outline: none;
+  border-color: #ff0000; /* Red border on focus */
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Red glow on focus */
+}
+
+.profile-form button {
+  background-color: #ff0000; /* Bright red button */
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.profile-form button:hover {
+  background-color: #cc0000; /* Darker red on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5); /* Glow effect */
+}

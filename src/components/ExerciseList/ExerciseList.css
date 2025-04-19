@@ -1,0 +1,80 @@
+/* Main container */
+.exercise-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #000000,
+    #660000
+  ); /* Black to dark red gradient */
+  color: #ffffff; /* White text for contrast */
+  padding: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.exercise-list h1 {
+  color: #ff0000; /* Bright red heading */
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Search bar */
+.search-bar {
+  width: 80%;
+  max-width: 500px;
+  padding: 10px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  background-color: #121212; /* Darker black for inputs */
+  color: #ffffff;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.search-bar:focus {
+  outline: none;
+  border-color: #ff0000; /* Red border on focus */
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); /* Red glow on focus */
+}
+
+/* Exercise grid */
+.exercise-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Exercise card */
+.exercise-card {
+  background-color: #1a1a1a; /* Dark black background */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3); /* Red shadow */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.exercise-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(255, 0, 0, 0.5); /* Glow effect */
+}
+
+.exercise-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.exercise-card h2 {
+  color: #ffffff;
+  font-size: 1.2rem;
+  margin: 0;
+}
