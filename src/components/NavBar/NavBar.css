@@ -1,5 +1,5 @@
 .navbar {
-  background-color: #1d1d1d; /* Light gray background */
+  background-color: #434242; /* Light gray background */
   padding: 0rem 1rem;
   display: flex;
   justify-content: inherit;
@@ -69,7 +69,6 @@ li {
   vertical-align: left; /* Align image in the middle of the nav bar */
 }
 
-
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -103,7 +102,7 @@ li {
     padding: 0.5rem 0.75rem;
   }
 
-  .navbar a, 
+  .navbar a,
   .navbar button,
   .welcome-message {
     font-size: 0.8rem;

@@ -295,3 +295,52 @@
     gap: 20px;
   }
 }
+/* Facilities Section */
+.facilities {
+  margin-top: 20px; /* Add spacing above the facilities section */
+  padding: 15px; /* Reduce padding */
+  background-color: #1a1a1a;
+  border-radius: 5px; /* Reduce border radius */
+  box-shadow: 0 2px 4px rgba(255, 0, 0, 0.2); /* Reduce shadow size */
+  color: #ffffff;
+  text-align: center;
+  max-width: 800px; /* Reduce the maximum width */
+  margin-left: auto; /* Center the section horizontally */
+  margin-right: auto; /* Center the section horizontally */
+}
+
+.facilities h2 {
+  font-size: 1.2rem; /* Reduce font size */
+  color: #ff0000;
+  margin-bottom: 15px;
+}
+
+.facility {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px; /* Reduce spacing between facilities */
+  gap: 15px; /* Reduce gap between image and text */
+}
+
+.facility img {
+  width: 40px; /* Reduce image size */
+  height: 40px; /* Reduce image size */
+  border-radius: 5px; /* Reduce border radius */
+  box-shadow: 0 2px 4px rgba(255, 0, 0, 0.2); /* Reduce shadow size */
+}
+
+.facility h3 {
+  font-size: 1.2rem; /* Reduce font size */
+  color: #ff4444;
+  margin-bottom: 5px;
+}
+
+.facility p {
+  font-size: 0.9rem; /* Reduce font size */
+  line-height: 1.4; /* Adjust line height */
+  color: #ffffff;
+}
+
+.facility div {
+  text-align: left;
+}
