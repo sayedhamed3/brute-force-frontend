@@ -1,0 +1,122 @@
+
+.class-list-container {
+    padding: 2rem;
+    background: radial-gradient(circle at center, #660000, #000000);
+    min-height: 100vh;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  .class-list-container h1 {
+    color: #ff0000;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+  }
+  
+  .no-classes {
+    text-align: center;
+    color: #ff5555;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+  }
+  
+  .class-item {
+    background-color: #1a1a1a;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #ff0000;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2);
+  }
+  
+  .class-item h2 {
+    color: #ff5555;
+    margin-top: 0;
+    font-size: 1.5rem;
+  }
+  
+  .class-item h4 {
+    color: #ddd;
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+  }
+  
+  .class-item p {
+    margin: 0.5rem 0;
+    line-height: 1.6;
+  }
+  
+  .class-item span {
+    display: inline-block;
+    margin-right: 0.5rem;
+    padding: 0.2rem 0.5rem;
+    background-color: rgba(255, 0, 0, 0.1);
+    border-radius: 4px;
+  }
+  
+  .class-item button {
+    background: linear-gradient(135deg, #ff3300, #aa0000);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+    margin-right: 0.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  .class-item button:hover {
+    background: linear-gradient(135deg, #ff0000, #990000);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+  }
+  
+  .add-class-btn {
+    background: linear-gradient(135deg, #ff3300, #aa0000);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .add-class-btn:hover {
+    background: linear-gradient(135deg, #ff0000, #990000);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+  }
+  
+  @media (max-width: 768px) {
+    .class-list-container {
+      padding: 1rem;
+    }
+  
+    .class-list-container h1 {
+      font-size: 2rem;
+    }
+  
+    .class-item {
+      padding: 1rem;
+    }
+  
+    .class-item h2 {
+      font-size: 1.3rem;
+    }
+  
+    .class-item h4

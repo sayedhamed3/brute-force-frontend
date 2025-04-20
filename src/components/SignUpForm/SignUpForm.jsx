@@ -1,6 +1,7 @@
-import {useState} from 'react'
-import axios from 'axios'
-import { useNavigate } from 'react-router'
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router";
+import "./SignUpForm.css";
 import { createTrainer } from '../../services/trainerService'
 
 function SignUpForm() {
@@ -94,41 +95,42 @@ async function handleMetrics(e){
     }
     
   return (
-    <div>
-      
+    <div className="sign-up">
       <form onSubmit={handleSubmit}>
         <h1>Signup</h1>
         <label htmlFor="username">Username:</label>
         <input
-         type="text"
-         name='username'
-         id='username'
-         value={formData.username}
-         onChange={handleChange}
-          />
+          type="text"
+          name="username"
+          id="username"
+          value={formData.username}
+          onChange={handleChange}
+        />
 
         <label htmlFor="password">Password:</label>
         <input
-         type="password"
-         name='password'
-         id='password'
-         value={formData.password}
-         onChange={handleChange}
-          />
-        <label htmlFor='name'>Name:</label>
-        <input type="text" 
-        name='name'
-        id='name' 
-        value={formData.name} 
-        onChange={handleChange} 
+          type="password"
+          name="password"
+          id="password"
+          value={formData.password}
+          onChange={handleChange}
         />
-        <label htmlFor='avatar'>Avatar:</label>
-        <input type="text"
-        name='avatar'
-        id='avatar'
-        value={formData.avatar}
-        onChange={handleChange}
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          value={formData.name}
+          onChange={handleChange}
         />
+        {/* <label htmlFor="avatar">Avatar:</label>
+        <input
+          type="text"
+          name="avatar"
+          id="avatar"
+          value={formData.avatar}
+          onChange={handleChange}
+        /> */}
         <label htmlFor='type'>Membership:</label>
         {formData.role === "trainer" ? (
                     <select
@@ -166,12 +168,12 @@ async function handleMetrics(e){
         value={formData.metrics.weight}
         onChange={handleMetrics}
         />
-        <label htmlFor='role'>Role:</label>
+        <label htmlFor="role">Role:</label>
         <select
-        name='role'
-        id='role'
-        value={formData.role}
-        onChange={handleChange}
+          name="role"
+          id="role"
+          value={formData.role}
+          onChange={handleChange}
         >
             <option value="user">User</option>
             <option value="trainer">Trainer</option>
@@ -179,12 +181,23 @@ async function handleMetrics(e){
         {formData.role === "trainer" && (
           <div>
             <label htmlFor='specialization'>Specialization:</label>
-            <input type="text"
-            name='specialization'
-            id='specialization'
-            value={trainerFormData.specialization}
-            onChange={handleTrainer}
-            />
+            <select name="specialization" id="specialization" value={trainerFormData.specialization}
+            onChange={handleTrainer}>
+                <option value="">Select a specialization</option>
+                  <option value="strength_training">Strength Training</option>
+                  <option value="weight_loss">Weight Loss</option>
+                  <option value="bodybuilding">Bodybuilding</option>
+                  <option value="hiit">HIIT</option>
+                  <option value="yoga">Yoga</option>
+                  <option value="swimming">Swimming</option>
+                  <option value="senior_fitness">Senior Fitness</option>
+                  <option value="sports_performance">Sports Performance</option>
+                  <option value="dance_fitness">Dance Fitness</option>
+                  <option value="boxing">Boxing</option>
+                  <option value="crossfit">CrossFit</option>
+                  <option value="mma">MMA</option>
+                  <option value="pilates">Pilates</option>
+            </select>
             <label htmlFor='experience'>Experience:</label>
             <input type="number"
             name='experience'
@@ -206,7 +219,7 @@ async function handleMetrics(e){
           <button>Submit</button>
       </form>
     </div>
-  )
+  );
 }
 
-export default SignUpForm
+export default SignUpForm;

@@ -1,101 +1,117 @@
-import { useState, useEffect } from "react"
-import { index } from "../../services/planService"
-import { Link } from "react-router"
-import { getMyPlans, getPrivatePlans} from "../../services/planService"
-import { authContext } from "../../context/AuthContext"
-import { useContext } from "react"
+import { useState, useEffect } from "react";
+import { index } from "../../services/planService";
+import { Link } from "react-router";
+import { getMyPlans } from "../../services/planService";
+import { authContext } from "../../context/AuthContext";
+import { useContext } from "react";
+import "./PlanList.css";
 
-function PlanList({ myPlans = false}) {
-
-    const [plans, setPlans] = useState([])
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(null)
-
-    const { user } = useContext(authContext)
+function PlanList({ myPlans = false }) {
+    const [plans, setPlans] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const { user } = useContext(authContext);
 
     const getPlans = async () => {
         try {
-            const res = await index()
-            setPlans(res)
+            const res = await index();
+            setPlans(res);
         } catch (err) {
-            setError(err)
+            setError(err);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
+    };
 
     const getPrivatePlans = async () => {
         try {
-            console.log(user)
-            const res = await getMyPlans(user._id)
-            console.log(res)
-            setPlans(res)
+            const res = await getMyPlans(user._id);
+            setPlans(res);
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            setError(error);
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
+    };
 
     useEffect(() => {
-        if(myPlans)
-        {
-            getPrivatePlans()
+        if (myPlans) {
+            getPrivatePlans();
         } else {
-            getPlans()
+            getPlans();
         }
-    }, [myPlans])
+    }, [myPlans]);
 
-    if (loading) return <p>Loading...</p>
-    if (error) return <p>Error: {error.message}</p>
+    if (loading) return <p className="loading-message">Loading...</p>;
+    if (error) return <p className="error-message">Error: {error.message}</p>;
 
-  return (
-    <>
-    {myPlans ? (<Link to={"/plans"}>All Plans</Link>) : (<Link to={"/plans/myPlans"}>My Plans</Link>)}
-        <div>Plan List</div>
-        <table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            {myPlans ? <th>Private/Public</th> : ''}
-            <th>Maker</th>
-            <th>Description</th>
-            <th>Exercises</th>
-            <th>Details</th>
-    
-        </tr>
-    </thead>
-    <tbody>
-        {plans.map((plan) => (
-            <tr key={plan._id}>
-                <td>{plan.Name}</td>
-                {myPlans ? <td>{plan.visibility ? "Public" : "Private" }</td> : ''}
-                <td>{plan.Maker?.name || "Unknown"}</td>
-                <td>{plan.Description}</td>
-                <td>
-                    <ul>
-                        { plan.exercises.map((ex, idx) => (
-                            <li key={idx}>
-                                 {ex.exercise?.name || "Unknown Exercise"}
-                                {" - "}
-                                {ex.sets?.length || 0} sets
-                            </li>
-                        ))}
-                    </ul>
-                </td>
-                <td>
-                    <Link to={`/plans/${plan._id}`}>View Plan Details</Link>
-                </td>
-            </tr>
-        ))}
-    </tbody>
-        </table>
+    return (
+        <div className="plan-list-container">
+            <div className="plan-list-header">
+                <h2 className="plan-list-title">
+                    {myPlans ? "My Training Plans" : "All Training Plans"}
+                </h2>
+                <div className="plan-nav-links">
+                    {myPlans ? (
+                    <Link to="/plans" className="plan-nav-link">
+                        View All Plans
+                    </Link>
+                    ) : (
+                    <Link to="/plans/myPlans" className="plan-nav-link">
+                        View My Plans
+                    </Link>
+                    )}
+                    <Link to="/plans/create" className="create-plan-btn">
+                    Create New Plan
+                    </Link>
+                </div>
+            </div>
 
-        <div>
-            <Link to="/plans/create">Create Plan</Link>
+            <table className="plan-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        {myPlans && <th>Visibility</th>}
+                        <th>Creator</th>
+                        <th>Description</th>
+                        <th>Exercises</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {plans.map((plan) => (
+                        <tr key={plan._id}>
+                            <td>{plan.Name}</td>
+                            {myPlans && (
+                                <td>
+                                    <span className={`visibility-${plan.visibility ? "public" : "private"}`}>
+                                        {plan.visibility ? "Public" : "Private"}
+                                    </span>
+                                </td>
+                            )}
+                            <td>{plan.Maker?.name || "Unknown"}</td>
+                            <td>{plan.Description}</td>
+                            <td>
+                                <ul>
+                                    {plan.exercises.map((ex, idx) => (
+                                        <li key={idx}>
+                                            {ex.exercise?.name || "Unknown Exercise"} - {ex.sets?.length || 0} sets
+                                        </li>
+                                    ))}
+                                </ul>
+                            </td>
+                            <td>
+                                <Link to={`/plans/${plan._id}`} className="view-plan-link">
+                                    View Details
+                                </Link>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
-    </>
-  )
+    );
 }
 
-export default PlanList
+export default PlanList;

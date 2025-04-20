@@ -3,6 +3,7 @@ import { authContext } from "../../context/AuthContext";
 import { createPlan } from "../../services/planService";
 import { useNavigate } from "react-router";
 import { index } from "../../services/exerciseService";
+import "./PlanForm.css"
 
 function PlanForm() {
     const { user } = useContext(authContext);
@@ -22,7 +23,11 @@ function PlanForm() {
     const loadData = async () => {
         try {
             const exercisesData = await index();
-            setAvailableExercises(exercisesData);
+            
+            const sortedExercises = [...exercisesData].sort((a, b) => 
+                a.name.localeCompare(b.name)
+            );
+            setAvailableExercises(sortedExercises);
         } catch (error) {
             console.error("Failed to load exercises:", error);
         }
@@ -39,6 +44,10 @@ function PlanForm() {
             [name]: name === "visibility" ? value === "true" : value
         });
     };
+
+    const handleCancel = () => {
+        navigate('/plans');
+    }
 
     const handleExerciseSelect = (e) => {
         setSelectedExercise(e.target.value);
@@ -104,6 +113,7 @@ function PlanForm() {
     };
 
     return (
+    <div className="plan-form-background">
         <div className="plan-form-container">
             <h1>Create New Plan</h1>
             <form onSubmit={onSubmit}>
@@ -224,12 +234,14 @@ function PlanForm() {
                 )}
 
                 <div className="form-actions">
+                    <button className="cancel-button" onClick={handleCancel}>Cancel</button>
                     <button type="submit" className="submit-button">
                         Create Plan
                     </button>
                 </div>
             </form>
         </div>
+    </div>
     );
 }
 

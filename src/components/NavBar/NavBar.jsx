@@ -1,40 +1,52 @@
-import { Link } from "react-router"
-import { useContext } from "react"
-import { authContext } from "../../context/AuthContext"
-
+import { Link } from "react-router";
+import { useContext } from "react";
+import { authContext } from "../../context/AuthContext";
+import "./NavBar.css";
+import logo from "../../../public/gym logos/gym_logo_-_red___black-removebg-preview.png";
 
 function NavBar() {
-  const {user, logout} = useContext(authContext)
-
+  const { user, logout } = useContext(authContext);
 
   return (
-    <div>
+    <div className="navbar">
+      <img src={logo} className="logo" />
       <ul>
-        <Link to="/home"><li>Homepage</li></Link>
+
         {user && (
-
           <>
-          <li>Welcome {user.username}</li>
-          <Link to="/plans"><li>Exercise Plans</li></Link>
-          <Link to="/classes"><li>Classes this week</li></Link>
-          <Link to="/profile"><li>Profile</li></Link>
-          <Link to="/exercises" ><li>Exercises</li></Link>
-          
-
-          <button onClick={logout}>Logout</button>
+         <li>
+              <Link to="/home">Homepage</Link>
+            </li>
+            <li>
+              <Link to="/plans">Exercise Plans</Link>
+            </li>
+            <li>
+              <Link to="/exercises">Exercises</Link>
+            </li>
+            <li>
+              <Link to="/classes">Classes</Link>
+            </li>
+            <li>
+              <Link to="/profile">Profile</Link>
+            </li>
+            <li>
+              <button onClick={logout}>Logout</button>
+            </li>
           </>
         )}
         {!user && (
           <>
-          <Link to='/login'><li>Login</li></Link>
-          <Link to='/signup'><li>Signup</li></Link>
+             <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/signup">Signup</Link>
+            </li>
           </>
         )}
-        
-
       </ul>
     </div>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;

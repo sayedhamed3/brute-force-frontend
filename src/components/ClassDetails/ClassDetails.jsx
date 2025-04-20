@@ -4,12 +4,14 @@ import axios from "axios";
 import { useNavigate,useParams } from "react-router";
 import { deleteClass } from "../../services/classService";
 import { getClass } from "../../services/classService";
+import "./ClassDetails.css"
+
 function classDetails(){
   const { user } = useContext(authContext); // Consume the user from authContext
   const [classData, setClasses] = useState(null)
   const { classId } = useParams()
   /*console.log(classId)*/
-  const navigate=useNavigate()
+  const navigate= useNavigate()
   {/*async function callProtectedRoute() {
         const token = localStorage.getItem("token");
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/test-jwt/checkout`, {
@@ -47,35 +49,49 @@ function classDetails(){
       }
   }
       return (
-        <div>
-            <h1>Class Details</h1>
-            {classData && (
-              <div>
-            <h2>Name: {classData.name}</h2>
-            <p>Plan: {classData.plan?.Name}</p>
-            <p>Trainer: {classData.trainer?.name}</p>
-            <p>
-                Days of the Week:{" "}
-                {classData.daysOfWeek.map((day) => {
-                    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                    return <span key={day}>{days[day]} </span>;
-                })}
-            </p>
-            <p>Start Time: {new Date(classData.startTime).toLocaleTimeString()}</p>
-            <p>End Time: {new Date(classData.endTime).toLocaleTimeString()}</p>
-            <p>Registered users: {classData.registeredUsers.map((User)=>{
-                return <span key={User._id}>{User.Name} </span>;
-            })}</p>
-            <button onClick={() => navigate("/classes")}>Back to Classes</button> 
-            {(user.role === "admin" || user.role === "trainer")&& (
-                  <div>
-                    <button onClick={() => handleEdit(classData._id)}>Edit Class</button>
-                    <button onClick={()=>handleDelete(classData._id)}>Delete Class</button>
-                  </div>
-                )}
-              </div>
+        <div className="class-details-container">
+      <h1>Class Details</h1>
+
+      {classData && (
+        <div className="class-details-content">
+          <h2>{classData.name}</h2>
+          <p><strong>Plan:</strong> {classData.plan?.Name}</p>
+          <p><strong>Trainer:</strong> {classData.trainer?.name}</p>
+
+          <p>
+            <strong>Days of the Week:</strong>{" "}
+            {classData.daysOfWeek.map((day) => {
+              const days = [
+                "Sunday", "Monday", "Tuesday",
+                "Wednesday", "Thursday", "Friday", "Saturday"
+              ];
+              return <span key={day}>{days[day]}</span>;
+            })}
+          </p>
+
+          <p><strong>Start Time:</strong> {new Date(classData.startTime).toLocaleTimeString()}</p>
+          <p><strong>End Time:</strong> {new Date(classData.endTime).toLocaleTimeString()}</p>
+
+          <p>
+            <strong>Registered Users:</strong>{" "}
+            {classData.registeredUsers.map((user) => (
+              <span key={user._id}>{user.Name}</span>
+            ))}
+          </p>
+
+          <div className="class-details-buttons">
+            <button onClick={() => navigate("/classes")}>Back to Classes</button>
+
+            {(user.role === "admin" || user.role === "trainer") && (
+              <>
+                <button onClick={() => handleEdit(classData._id)}>Edit Class</button>
+                <button onClick={() => handleDelete(classData._id)}>Delete Class</button>
+              </>
             )}
+          </div>
         </div>
+      )}
+    </div>
        );
 }
 
