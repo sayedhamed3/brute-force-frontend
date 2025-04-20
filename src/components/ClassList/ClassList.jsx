@@ -2,9 +2,10 @@ import { useState,useContext,useEffect} from "react";
 import { authContext } from "../../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import "./ClassList.css"
 
 
-function classList(){
+function ClassList(){
     const { user } = useContext(authContext); // Consume the user from authContext
     const [classes, setClasses] = useState([])
     const navigate=useNavigate()
@@ -27,6 +28,7 @@ function classList(){
           });
           setClasses(response.data)
           console.log(response.data);
+          console.log("classes:",classes)
         } catch (error) {
           console.log("error fetching classes:",error)
         }
@@ -46,39 +48,65 @@ function classList(){
         }
         , []);
       return (
-        <div>
-    
-           <h1>Upcoming classes</h1>
-               
-                { classes  && classes.map((classItem) => (
-                    <div key={classItem._id} className="class-item">
-                        <h2>{classItem.name}</h2>
-                        <h4>{classItem.plan.name} plan, Description:{classItem.plan.Description}</h4>
-                        <h2>trainer:{classItem.trainer.name}</h2>
-                        <p>{classItem.description}</p>
-                        <p>Day of the week:
-                          {classItem.daysOfWeek.map((day)=>{
-                            const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-                            return <span key={day}>{days[day]} </span>
-                          })}
+        <div className="class-list-container">
+            <h1>Upcoming classes</h1>
+            
+            {classes?.length === 0 ? (
+                <p>No classes scheduled</p>
+            ) : (
+                classes?.map((classItem) => (
+                    <div key={classItem?._id} className="class-item">
+                        <h2>{classItem?.name || "Unnamed Class"}</h2>
+                        <h4>
+                            {classItem?.plan?.name || "No plan"} plan, 
+                            Description: {classItem?.plan?.Description || "No description"}
+                        </h4>
+                        <h2>Trainer: {classItem?.trainer?.name || "No trainer assigned"}</h2>
+                        <p>{classItem?.description || "No description available"}</p>
+                        <p>
+                            Day of the week:
+                            {classItem?.daysOfWeek?.length > 0 ? (
+                                classItem.daysOfWeek.map((day) => {
+                                    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                                    return <span key={day}>{days[day]} </span>;
+                                })
+                            ) : (
+                                <span>No days scheduled</span>
+                            )}
                         </p>
-                        <p>Start Time: {new Date(classItem.startTime).toLocaleTimeString()}</p>
-                        <p>End Time: {new Date(classItem.endTime).toLocaleTimeString()}</p>
-                        {(user.role === "admin" || user.role === "trainer")&& (
-                          <div>
-                            <button onClick={() => navigate(`/classes/${classItem._id}`)}>View class details</button>
-                            <button onClick={() => handleDelete(classItem._id)}>Delete</button>
-                          </div>
+                        <p>
+                          Capacity: {classItem?.capacity ? classItem.capacity : "Undefined"}
+                        </p>
+                        <p>Start Time: {classItem?.startTime ? new Date(classItem.startTime).toLocaleTimeString() : "Not specified"}</p>
+                        <p>End Time: {classItem?.endTime ? new Date(classItem.endTime).toLocaleTimeString() : "Not specified"}</p>
+                        
+                        {(user?.role === "admin" || user?.role === "trainer") && (
+                            <div>
+                                <button onClick={() => navigate(`/classes/${classItem?._id}`)}>
+                                    View class details
+                                </button>
+                            </div>
                         )}
+                        {(user?.role === "user" && (
+                          <>
+                          <div>
+                            <button onClick={handleRegister}>{isRegistered ? "Unregister" : "Register"}</button>
+                          </div>
+                          </>
+                        ))}
                     </div>
-                ))}
-                {(user.role === "admin" || user.role === "trainer")&& (
-                  <div>
-                    <button onClick={() => navigate(`/classes/create`,{state:{isEdit:false}})}>Add a new Class</button>
-                  </div>
-                )}
+                ))
+            )}
+            
+            {(user?.role === "admin" || user?.role === "trainer") && (
+                <div>
+                    <button onClick={() => navigate(`/classes/create`, { state: { isEdit: false } })}>
+                        Add a new Class
+                    </button>
+                </div>
+            )}
         </div>
        );
 }
 
-export default classList
+export default ClassList
