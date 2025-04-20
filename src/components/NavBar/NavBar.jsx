@@ -1,18 +1,20 @@
-import { Link } from "react-router"
-import { useContext } from "react"
-import { authContext } from "../../context/AuthContext"
-
+import { Link } from "react-router";
+import { useContext } from "react";
+import { authContext } from "../../context/AuthContext";
+import "./NavBar.css";
+import logo from "../../../public/gym logos/gym_logo_-_red___black-removebg-preview.png";
 
 function NavBar() {
-  const {user, logout} = useContext(authContext)
-
+  const { user, logout } = useContext(authContext);
 
   return (
-    <div>
+    <div className="navbar">
+      <img src={logo} className="logo" />
       <ul>
-        <Link to="/home"><li>Homepage</li></Link>
+        <Link to="/home">
+          <li>Homepage</li>
+        </Link>
         {user && (
-
           <>
           <li>Welcome {user.username}</li>
           <Link to="/plans"><li>Exercise Plans</li></Link>
@@ -26,15 +28,17 @@ function NavBar() {
         )}
         {!user && (
           <>
-          <Link to='/login'><li>Login</li></Link>
-          <Link to='/signup'><li>Signup</li></Link>
+            <Link to="/login">
+              <li>Login</li>
+            </Link>
+            <Link to="/signup">
+              <li>Signup</li>
+            </Link>
           </>
         )}
-        
-
       </ul>
     </div>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;

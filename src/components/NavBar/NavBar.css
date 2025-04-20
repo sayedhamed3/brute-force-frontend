@@ -1,0 +1,70 @@
+.navbar {
+  background-color: #1d1d1d; /* Light gray background */
+  padding: 0rem 1rem;
+  display: flex;
+  justify-content: inherit;
+  align-items: left;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(255, 0, 0, 0.3); /* Red shadow for a bold effect */
+}
+ul {
+  list-style: none;
+  display: flex; /* Ensures the list items are displayed inline */
+  align-items: left;
+  gap: 1rem;
+  margin: 2rem;
+  padding: 1rem 0; /* Adds padding to the top and bottom */
+}
+
+li {
+  display: inline-block;
+  padding: 0rem 5rem;
+  margin: 0px;
+}
+
+.navbar a {
+  color: rgb(220, 220, 220);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #ff0000; /* Bright red on hover */
+  transform: scale(1.1); /* Slight zoom effect */
+}
+
+.welcome-message {
+  color: rgb(153, 0, 0);
+  padding: 0px 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.navbar button {
+  background: #ff0000;
+  color: white;
+  border: none;
+  padding: 0rem 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar button:hover {
+  background: #cc0000; /* Darker red on hover */
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5); /* Glow effect */
+}
+
+.logo {
+  width: 120px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  vertical-align: left; /* Align image in the middle of the nav bar */
+}

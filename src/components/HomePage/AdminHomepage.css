@@ -1,0 +1,75 @@
+/* Admin Homepage Styles */
+.admin-homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #000000,
+    #660000
+  ); /* Black to dark red gradient */
+  color: #ffffff; /* White text for contrast */
+  padding: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.admin-homepage h1 {
+  color: #ff0000; /* Bright red heading */
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.admin-homepage table {
+  width: 80%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background-color: #1a1a1a; /* Dark black background */
+  box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3); /* Red shadow */
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.admin-homepage th,
+.admin-homepage td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #333; /* Subtle border between rows */
+  color: #ffffff; /* White text */
+}
+
+.admin-homepage th {
+  background-color: #660000; /* Dark red background for headers */
+  color: #ffffff; /* White text */
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.admin-homepage tr:nth-child(even) {
+  background-color: #121212; /* Slightly lighter black for alternating rows */
+}
+
+.admin-homepage tr:hover {
+  background-color: #333333; /* Highlight row on hover */
+}
+
+.admin-homepage button {
+  background-color: #ff0000; /* Bright red button */
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.admin-homepage button:hover {
+  background-color: #cc0000; /* Darker red on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 4px 10px rgba(255, 0, 0, 0.5); /* Glow effect */
+}

@@ -1,23 +1,20 @@
-import React from 'react'
-import { useContext } from 'react'
-import { authContext } from '../../context/AuthContext'
-import AdminHomepage from './AdminHomepage'
-import UserHomepage from './UserHomePage'
-
+import React from "react";
+import { useContext } from "react";
+import { authContext } from "../../context/AuthContext";
+import AdminHomepage from "./AdminHomepage";
+import UserHomepage from "./UserHomePage";
+import "../../../src/App.css";
+import "./HomepageIndex.css";
 
 function HomepageIndex() {
-    const { user } = useContext(authContext); 
-    console.log(user);
+  const { user } = useContext(authContext);
+  console.log(user);
   return (
     <div>
-        <div>Homepage </div>
-        {user.role === 'admin' ? (
-            <AdminHomepage />
-        ) : (
-            <UserHomepage />
-        )}
+      {/* <div>Homepage </div> */}
+      {user.role === "admin" ? <AdminHomepage /> : <UserHomepage />}
     </div>
-  )
+  );
 }
 
-export default HomepageIndex
+export default HomepageIndex;

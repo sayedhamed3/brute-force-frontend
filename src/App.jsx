@@ -1,3 +1,4 @@
+
 import './App.css'
 import {Routes ,Route} from 'react-router'
 import LoginForm from './components/LoginForm/LoginForm.jsx'
@@ -39,9 +40,11 @@ function App() {
   //   }
   // }, [user])
   
+
+
   return (
     <>
-      <NavBar/>
+      <NavBar />
       <Routes>
         <Route path="/signup" element={<SignUpForm/>}/>
         <Route path="/login" element={<LoginForm/>}/>
@@ -58,9 +61,10 @@ function App() {
         <Route path="/classes/:classId" element={<ValidateIsLoggedIn><ClasseDetails/></ValidateIsLoggedIn>}/>
         <Route path='/classes/create' element={<ValidateIsLoggedIn><ClassForm/></ValidateIsLoggedIn>}></Route>
         <Route path='/classes/edit/:classId' element={<ValidateIsLoggedIn><ClassForm/></ValidateIsLoggedIn>}></Route>
+
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
