@@ -87,13 +87,6 @@ function ClassList(){
                                 </button>
                             </div>
                         )}
-                        {(user?.role === "user" && (
-                          <>
-                          <div>
-                            <button onClick={handleRegister}>{isRegistered ? "Unregister" : "Register"}</button>
-                          </div>
-                          </>
-                        ))}
                     </div>
                 ))
             )}
