@@ -79,11 +79,81 @@ function UserHomePage() {
         <Loader /> {/* Add the Loader component here */}
         <Loader2 /> {/* Add the Loader component here */}
         <Loader3 /> {/* Add the Loader component here */}
-        <p>
-          classes example
-          <ul>1-sdsdsd</ul>
-          <li>1-sdsdsd</li>
-        </p>
+      </div>
+
+      {/* Facilities Section */}
+      <div className="facilities">
+        <h2>Our Classes and Facilities</h2>
+        <div className="facility">
+          <img src="./public/logos/water sports.svg" alt="Aqua Swimming" />
+          <div>
+            <h3>Aqua Swimming</h3>
+            <p>
+              Improve endurance and strength with low-impact water-based
+              exercises. Perfect for all fitness levels.
+            </p>
+          </div>
+        </div>
+        <div className="facility">
+          <img src="./public/logos/mind-body.svg" alt="Yoga" />
+          <div>
+            <h3>Yoga</h3>
+            <p>
+              Enhance flexibility, balance, and mindfulness with our yoga
+              classes led by experienced instructors.
+            </p>
+          </div>
+        </div>
+        <div className="facility">
+          <img src="./public/logos/clistanic-classes.svg" alt="Calisthenics" />
+          <div>
+            <h3>Calisthenics</h3>
+            <p>
+              Build functional strength and body control with bodyweight
+              exercises.
+            </p>
+          </div>
+        </div>
+        <div className="facility">
+          <img src="./public/logos/exercise-Cardio.svg" alt="Cardio" />
+          <div>
+            <h3>Cardio</h3>
+            <p>
+              Boost your heart health and burn calories with high-energy cardio
+              workouts.
+            </p>
+          </div>
+        </div>
+        <div className="facility">
+          <img src="./public/logos/boxing-glove.svg" alt="Combat Boxing" />
+          <div>
+            <h3>Combat Boxing & Martial Arts</h3>
+            <p>
+              Learn self-defense and improve agility, strength, and confidence
+              with our combat classes.
+            </p>
+          </div>
+        </div>
+        <div className="facility">
+          <img src="./public/logos/mobility-flex.svg" alt="Pilates" />
+          <div>
+            <h3>Mind & Core Pilates</h3>
+            <p>
+              Strengthen your core and improve posture with our pilates classes
+              designed for all levels.
+            </p>
+          </div>
+        </div>
+        <div className="facility">
+          <img src="./public/logos/moulding-svgrepo-com.svg" alt="Stretching" />
+          <div>
+            <h3>Mobility & Flexibility Stretching</h3>
+            <p>
+              Increase your range of motion and reduce the risk of injury with
+              guided stretching sessions.
+            </p>
+          </div>
+        </div>
       </div>
       <div className="gif-section">
         <img

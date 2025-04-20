@@ -1,7 +1,3 @@
-
-
-
-
 .exercise-list-container {
   width: 100%;
   margin: 0 auto;
@@ -24,7 +20,7 @@
 
 .exercise-table {
   width: 80%;
-  transform:translateX(10%);
+  transform: translateX(10%);
   border-collapse: collapse;
   margin: 30px 0;
   background-color: #1a1a1a;
@@ -60,8 +56,8 @@
 }
 
 .exercise-table img {
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 80px;
   object-fit: cover;
   border-radius: 4px;
   border: 1px solid #444;
@@ -177,20 +173,20 @@
     width: 95%;
     padding: 30px 10px;
   }
-  
+
   .filter-controls {
     gap: 15px;
   }
-  
+
   .filter-controls input,
   .filter-controls select {
     min-width: 100%;
   }
-  
+
   .exercise-table {
     font-size: 0.9rem;
   }
-  
+
   .exercise-table th,
   .exercise-table td {
     padding: 12px 15px;
